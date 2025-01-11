@@ -127,7 +127,7 @@ input::placeholder {
   cursor: pointer;
 }
 
-/* Old button styles (kept just in case)
+/* (Kept old button styles just in case)
 button[type="submit"] {
   align-self: center;
   background-color: #ff9800;
@@ -162,20 +162,25 @@ button[type="submit"]:hover {
     padding: 20px;
   }
 
-  /* ---- MAKE NAVBAR SCROLLABLE HORIZONTALLY ---- */
+  /* Make navbar horizontally scrollable & hide scrollbars */
   #navbar ul {
-    /* Wrap in a single row that scrolls left-right */
-    display: flex;
-    flex-wrap: nowrap;             /* prevents wrapping to new lines */
-    overflow-x: auto;             /* allows horizontal scrolling */
+    flex-wrap: nowrap;
+    overflow-x: auto;             /* horizontal scrolling */
+    overflow-y: hidden;           /* no vertical scroll bar */
     -webkit-overflow-scrolling: touch; /* smooth scrolling on mobile */
-    justify-content: flex-start;   /* align items from left to right */
-    gap: 20px;                     /* maintain spacing between items */
+    justify-content: flex-start;
+    gap: 20px;
+    
+    /* Hide scrollbars in Firefox */
+    scrollbar-width: none;
+  }
+  /* Hide scrollbars in Chrome, Safari, Opera */
+  #navbar ul::-webkit-scrollbar {
+    display: none;
   }
 
-  /* Optionally ensure each menu item doesn't shrink */
   #navbar ul li {
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* each menu item won't shrink */
   }
 }
 
