@@ -8,7 +8,7 @@
 /* Font & fallback background */
 html, body {
   font-family: 'Playfair Display', serif;
-  background: #000; 
+  background: #000;
 }
 
 /* 
@@ -127,7 +127,7 @@ input::placeholder {
   cursor: pointer;
 }
 
-/* Submit Button */
+/* (Old button styles kept for reference)
 button[type="submit"] {
   align-self: center;
   background-color: #ff9800;
@@ -139,17 +139,16 @@ button[type="submit"] {
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
-
 button[type="submit"]:hover {
   background-color: #ffc107;
   transform: scale(1.05);
 }
+*/
 
 /* fullPage.js Dot Navigation colors */
 .fp-right ul li a span {
   background: #00ffff !important;
 }
-
 .fp-right ul li a.active span {
   background: #ff9800 !important;
 }
@@ -160,8 +159,39 @@ button[type="submit"]:hover {
     width: 90%;
     padding: 20px;
   }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-  }
+}
+
+/* ---- SLIDE TO SUBMIT STYLING ---- */
+.slide-container {
+  width: 100%;
+  margin-top: 20px;
+}
+.slider-track {
+  position: relative;
+  width: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50px;
+  height: 50px;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+.slider-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 150px;
+  background-color: #ff9800;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+#slider-text {
+  color: #000;
+  font-weight: 600;
+  pointer-events: none;
 }
