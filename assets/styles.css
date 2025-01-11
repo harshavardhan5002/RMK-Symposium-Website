@@ -74,7 +74,7 @@ html, body {
 .registration-container {
   width: 80%;
   max-width: 500px;
-  margin: 0 auto;              /* Ensures horizontal centering */
+  margin: 0 auto; /* Ensures horizontal centering */
   padding: 20px;
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px);
@@ -127,7 +127,7 @@ input::placeholder {
   cursor: pointer;
 }
 
-/* (Old button styles kept for reference)
+/* Old button styles (kept just in case)
 button[type="submit"] {
   align-self: center;
   background-color: #ff9800;
@@ -139,6 +139,7 @@ button[type="submit"] {
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
+
 button[type="submit"]:hover {
   background-color: #ffc107;
   transform: scale(1.05);
@@ -158,6 +159,20 @@ button[type="submit"]:hover {
   .registration-container {
     width: 90%;
     padding: 20px;
+  }
+
+  /* NEW NAVBAR LINES: ensures the navbar is usable on phones */
+  #navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  #navbar ul li {
+    margin: 0; /* optionally add vertical spacing if needed */
+  }
+  #navbar ul li a {
+    display: block;
+    text-align: center;
+    width: 100%;
   }
 }
 
