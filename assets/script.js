@@ -69,27 +69,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const sliderText = document.getElementById('slider-text');
 
   let isDragging = false;
-  let startX = 0;    // mouse/touch down x
-  let offsetX = 0;   // how far handle has moved
+  let startX = 0;
+  let offsetX = 0;
 
-  // Validate form fields & checkboxes
   function validateForm() {
     const name = document.getElementById('reg-name').value.trim();
     const email = document.getElementById('reg-email').value.trim();
     const phone = document.getElementById('reg-phone').value.trim();
     const college = document.getElementById('reg-college').value.trim();
-    
-    // NEW FIELDS
     const department = document.getElementById('reg-department').value.trim();
     const year = document.getElementById('reg-year').value.trim();
-    // END NEW FIELDS
-
-    // Check if all fields are filled
+    
     if (!name || !email || !phone || !college || !department || !year) {
       return false;
     }
 
-    // At least one event must be checked
     const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
     let anyChecked = false;
     checkboxes.forEach(box => {
@@ -98,16 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!anyChecked) {
       return false;
     }
-
     return true;
   }
 
-  // Helper: Sets handle position with bounds check
   function setHandlePosition(px) {
     const trackRect = track.getBoundingClientRect();
     const maxMove = trackRect.width - handle.offsetWidth;
 
-    // Constrain offset
     if (px < 0) px = 0;
     if (px > maxMove) px = maxMove;
 
@@ -119,19 +110,16 @@ document.addEventListener('DOMContentLoaded', function() {
       isDragging = false;
 
       if (validateForm()) {
-        // Turn everything green & update text
         track.style.backgroundColor = '#00ff00';
         handle.style.backgroundColor = '#00ff00';
         sliderText.innerText = 'Submitted!';
 
-        // Delay actual submission to let user see it
         setTimeout(() => {
           form.submit();
         }, 800);
 
       } else {
         alert('Please fill all fields and select at least one event.');
-        // Reset handle
         setTimeout(() => {
           setHandlePosition(0);
         }, 300);
@@ -155,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('mouseup', () => {
     if (!isDragging) return;
     isDragging = false;
-    // If not at end, reset
     if (offsetX < track.offsetWidth - handle.offsetWidth) {
       setHandlePosition(0);
     }
@@ -178,10 +165,34 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('touchend', () => {
     if (!isDragging) return;
     isDragging = false;
-    // If not at end, reset
     if (offsetX < track.offsetWidth - handle.offsetWidth) {
       setHandlePosition(0);
     }
   });
 })();
 // ---- END SLIDE TO SUBMIT LOGIC ----
+
+
+// ---- NAVBAR ARROW SCROLLING LOGIC ----
+(function() {
+  const leftArrow = document.querySelector('.nav-arrow-left');
+  const rightArrow = document.querySelector('.nav-arrow-right');
+  const navUl = document.querySelector('#navbar ul');
+
+  // The amount (in pixels) to scroll per click
+  const SCROLL_STEP = 100;
+
+  leftArrow.addEventListener('click', () => {
+    navUl.scrollBy({
+      left: -SCROLL_STEP,
+      behavior: 'smooth'
+    });
+  });
+
+  rightArrow.addEventListener('click', () => {
+    navUl.scrollBy({
+      left: SCROLL_STEP,
+      behavior: 'smooth'
+    });
+  });
+})();
