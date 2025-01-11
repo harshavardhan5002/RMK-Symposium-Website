@@ -127,7 +127,7 @@ input::placeholder {
   cursor: pointer;
 }
 
-/* (Kept old button styles just in case)
+/* Old button styles (kept just in case)
 button[type="submit"] {
   align-self: center;
   background-color: #ff9800;
@@ -162,25 +162,37 @@ button[type="submit"]:hover {
     padding: 20px;
   }
 
-  /* Make navbar horizontally scrollable & hide scrollbars */
+  /* Show a horizontal scroll bar, hide vertical, style thumb & track */
   #navbar ul {
     flex-wrap: nowrap;
-    overflow-x: auto;             /* horizontal scrolling */
-    overflow-y: hidden;           /* no vertical scroll bar */
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on mobile */
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     justify-content: flex-start;
     gap: 20px;
-    
-    /* Hide scrollbars in Firefox */
-    scrollbar-width: none;
+
+    scrollbar-width: thin;            /* Firefox: thin scrollbar */
+    scrollbar-color: #ff9800 #444;    /* Firefox: thumb #ff9800, track #444 */
   }
-  /* Hide scrollbars in Chrome, Safari, Opera */
+
+  /* WebKit: define custom scrollbar track & thumb */
   #navbar ul::-webkit-scrollbar {
+    height: 6px; /* scrollbar thickness */
+  }
+  #navbar ul::-webkit-scrollbar-track {
+    background: #444; /* track color */
+  }
+  #navbar ul::-webkit-scrollbar-thumb {
+    background: #ff9800; /* thumb color */
+    border-radius: 3px;
+  }
+  /* Hides the arrow buttons on either end of the scrollbar in Chrome/Safari/Edge */
+  #navbar ul::-webkit-scrollbar-button {
     display: none;
   }
 
   #navbar ul li {
-    flex: 0 0 auto; /* each menu item won't shrink */
+    flex: 0 0 auto; /* keep each list item at natural width */
   }
 }
 
