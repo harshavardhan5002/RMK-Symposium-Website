@@ -139,7 +139,6 @@ button[type="submit"] {
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
-
 button[type="submit"]:hover {
   background-color: #ffc107;
   transform: scale(1.05);
@@ -154,25 +153,29 @@ button[type="submit"]:hover {
   background: #ff9800 !important;
 }
 
-/* Responsive: Smaller screens */
+/* -------------------------------------
+   Responsive: Smaller screens
+   ------------------------------------- */
 @media (max-width: 768px) {
   .registration-container {
     width: 90%;
     padding: 20px;
   }
 
-  /* NEW NAVBAR LINES: ensures the navbar is usable on phones */
+  /* ---- MAKE NAVBAR SCROLLABLE HORIZONTALLY ---- */
   #navbar ul {
-    flex-direction: column;
-    gap: 10px;
+    /* Wrap in a single row that scrolls left-right */
+    display: flex;
+    flex-wrap: nowrap;             /* prevents wrapping to new lines */
+    overflow-x: auto;             /* allows horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on mobile */
+    justify-content: flex-start;   /* align items from left to right */
+    gap: 20px;                     /* maintain spacing between items */
   }
+
+  /* Optionally ensure each menu item doesn't shrink */
   #navbar ul li {
-    margin: 0; /* optionally add vertical spacing if needed */
-  }
-  #navbar ul li a {
-    display: block;
-    text-align: center;
-    width: 100%;
+    flex: 0 0 auto;
   }
 }
 
