@@ -1,0 +1,167 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font & fallback background */
+html, body {
+  font-family: 'Playfair Display', serif;
+  background: #000; 
+}
+
+/* 
+  Each .section is a FLEX container 
+  that fully occupies the screen, 
+  centering child elements horizontally & vertically.
+*/
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  text-align: center;
+  color: #fff;
+
+  /* Background image with overlay */
+  background: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images2.alphacoders.com/111/thumb-1920-1113005.jpg') 
+      no-repeat center center;
+  background-size: cover;
+}
+
+/* Fade effect only on textual content & the form container */
+.content,
+.registration-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Navbar */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  padding: 10px 20px;
+  z-index: 9999;
+}
+
+#navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+#navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+#navbar ul li a:hover {
+  background: #00ff7f;
+  color: #000;
+}
+
+/* The translucent box for the form */
+.registration-container {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;              /* Ensures horizontal centering */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+/* Registration Form */
+#registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+label {
+  font-weight: 600;
+  color: #00ffff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.checkbox-group p {
+  margin-bottom: 5px;
+  color: #00ffff;
+  font-weight: 600;
+}
+
+.checkbox-group label {
+  display: block;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  align-self: center;
+  background-color: #ff9800;
+  color: #000;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #ffc107;
+  transform: scale(1.05);
+}
+
+/* fullPage.js Dot Navigation colors */
+.fp-right ul li a span {
+  background: #00ffff !important;
+}
+
+.fp-right ul li a.active span {
+  background: #ff9800 !important;
+}
+
+/* Responsive: Smaller screens */
+@media (max-width: 768px) {
+  .registration-container {
+    width: 90%;
+    padding: 20px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+  }
+}

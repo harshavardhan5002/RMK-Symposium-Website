@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dark Symposium</title>
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" 
+    rel="stylesheet" 
+  />
+
+  <!-- fullPage.js CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css"
+  />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav id="navbar">
+    <ul id="menu">
+      <li data-menuanchor="home"><a href="#home">Home</a></li>
+      <li data-menuanchor="about-us"><a href="#about-us">About Us</a></li>
+      <li data-menuanchor="event1"><a href="#event1">Event 1</a></li>
+      <li data-menuanchor="event2"><a href="#event2">Event 2</a></li>
+      <li data-menuanchor="event3"><a href="#event3">Event 3</a></li>
+      <li data-menuanchor="event4"><a href="#event4">Event 4</a></li>
+      <li data-menuanchor="event5"><a href="#event5">Event 5</a></li>
+      <li data-menuanchor="register"><a href="#register">Register</a></li>
+    </ul>
+  </nav>
+
+  <!-- FullPage container -->
+  <div id="fullpage">
+    <!-- 1: Home -->
+    <div class="section" id="home">
+      <div class="content">
+        <h1>Welcome to Dark Blitzkrieg</h1>
+        <p>The first section should animate right away on load.</p>
+      </div>
+    </div>
+
+    <!-- 2: About Us -->
+    <div class="section" id="about-us">
+      <div class="content">
+        <h2>About Us</h2>
+        <p>All subsequent sections animate when you scroll to them.</p>
+      </div>
+    </div>
+
+    <!-- 3: Event 1 -->
+    <div class="section" id="event1">
+      <div class="content">
+        <h2>Event 1 - Tech Paper</h2>
+        <p>Some info about Event 1</p>
+      </div>
+    </div>
+
+    <!-- 4: Event 2 -->
+    <div class="section" id="event2">
+      <div class="content">
+        <h2>Event 2 - Project Expo</h2>
+        <p>Some info about Event 2</p>
+      </div>
+    </div>
+
+    <!-- 5: Event 3 -->
+    <div class="section" id="event3">
+      <div class="content">
+        <h2>Event 3 - Technical Quiz</h2>
+        <p>Some info about Event 3</p>
+      </div>
+    </div>
+
+    <!-- 6: Event 4 -->
+    <div class="section" id="event4">
+      <div class="content">
+        <h2>Event 4 - Laser Tag</h2>
+        <p>Some info about Event 4</p>
+      </div>
+    </div>
+
+    <!-- 7: Event 5 -->
+    <div class="section" id="event5">
+      <div class="content">
+        <h2>Event 5 - Connections</h2>
+        <p>Some info about Event 5</p>
+      </div>
+    </div>
+
+    <!-- 8: Register -->
+    <div class="section" id="register">
+      <div class="registration-container">
+        <h2>Register Now</h2>
+        <form id="registration-form">
+          <div class="form-group">
+            <label for="reg-name">Name</label>
+            <input type="text" id="reg-name" required />
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" required />
+          </div>
+          <div class="form-group">
+            <label for="reg-phone">Phone</label>
+            <input type="tel" id="reg-phone" required />
+          </div>
+          <div class="form-group">
+            <label for="reg-college">College</label>
+            <input type="text" id="reg-college" required />
+          </div>
+          <div class="form-group checkbox-group">
+            <p>Select Event(s):</p>
+            <label><input type="checkbox" /> Event 1</label>
+            <label><input type="checkbox" /> Event 2</label>
+            <label><input type="checkbox" /> Event 3</label>
+            <label><input type="checkbox" /> Event 4</label>
+            <label><input type="checkbox" /> Event 5</label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div> <!-- /#fullpage -->
+
+  <!-- fullPage.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new fullpage('#fullpage', {
+        anchors: [
+          'home',
+          'about-us',
+          'event1',
+          'event2',
+          'event3',
+          'event4',
+          'event5',
+          'register'
+        ],
+        menu: '#menu',
+        navigation: true,
+        navigationPosition: 'right',
+        navigationTooltips: [
+          'Home',
+          'About Us',
+          'Event 1',
+          'Event 2',
+          'Event 3',
+          'Event 4',
+          'Event 5',
+          'Register'
+        ],
+        showActiveTooltip: true,
+        
+        // Snap-like scrolling
+        autoScrolling: true,
+        fitToSection: true,
+        fitToSectionDelay: 500, 
+        scrollingSpeed: 700, 
+        scrollBar: true, // helps transitions & ensures a real scrollbar
+
+        afterRender: function() {
+          // Immediately fade in the HOME content
+          const homeElems = document.querySelectorAll('#home .content');
+          homeElems.forEach(elem => {
+            elem.style.opacity = 1;
+            elem.style.transform = 'translateY(0)';
+          });
+        },
+
+        afterLoad: function(origin, destination) {
+          // Fade in the newly active section's content
+          const activeElems = destination.item.querySelectorAll('.content, .registration-container');
+          activeElems.forEach(elem => {
+            elem.style.opacity = 1;
+            elem.style.transform = 'translateY(0)';
+          });
+        },
+
+        onLeave: function(origin, destination) {
+          // Fade out the old section's content
+          const leavingElems = origin.item.querySelectorAll('.content, .registration-container');
+          leavingElems.forEach(elem => {
+            elem.style.opacity = 0;
+            elem.style.transform = 'translateY(30px)';
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
