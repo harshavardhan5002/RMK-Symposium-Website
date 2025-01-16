@@ -27,7 +27,7 @@ html, body {
   /* Background image with overlay */
   background: 
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url('https://images2.alphacoders.com/111/thumb-1920-1113005.jpg') 
+    url('/assets/111.jpg') 
       no-repeat center center;
   background-size: cover;
 }
