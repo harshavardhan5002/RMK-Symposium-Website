@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
       'event3',
       'event4',
       'event5',
+      'map',
+      'rules',
       'register'
     ],
     menu: '#menu',
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
       'Event 3',
       'Event 4',
       'Event 5',
+      'Map',
+      'Rules',
       'Register'
     ],
     showActiveTooltip: true,
@@ -30,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fitToSection: true,
     fitToSectionDelay: 500,
     scrollingSpeed: 700,
-    scrollBar: true, // helps transitions & ensures a real scrollbar
+    scrollBar: true,
 
     afterRender: function() {
       // Immediately fade in the HOME content
@@ -61,12 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// ---- SLIDE TO SUBMIT LOGIC ----
+// ---- SLIDE TO SUBMIT LOGIC (no-refresh) ----
 (function() {
   const form = document.getElementById('registration-form');
   const handle = document.getElementById('slider-handle');
   const track = document.querySelector('.slider-track');
   const sliderText = document.getElementById('slider-text');
+
+  // Our custom success modal
+  const successModal = document.getElementById('success-modal');
+  const closeModalBtn = document.getElementById('close-modal-btn');
 
   let isDragging = false;
   let startX = 0;
@@ -79,20 +87,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const college = document.getElementById('reg-college').value.trim();
     const department = document.getElementById('reg-department').value.trim();
     const year = document.getElementById('reg-year').value.trim();
-    
+
+    // All fields required
     if (!name || !email || !phone || !college || !department || !year) {
       return false;
     }
-
+    // At least one event checked
     const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
     let anyChecked = false;
     checkboxes.forEach(box => {
       if (box.checked) anyChecked = true;
     });
-    if (!anyChecked) {
-      return false;
-    }
-    return true;
+    return anyChecked;
   }
 
   function setHandlePosition(px) {
@@ -105,18 +111,20 @@ document.addEventListener('DOMContentLoaded', function() {
     offsetX = px;
     handle.style.transform = `translateX(${px}px)`;
 
-    // If handle reached the end => attempt submit
+    // If handle reached the end => attempt pseudo-submit
     if (px >= maxMove) {
       isDragging = false;
 
       if (validateForm()) {
+        // Turn track & handle green to indicate success
         track.style.backgroundColor = '#00ff00';
         handle.style.backgroundColor = '#00ff00';
         sliderText.innerText = 'Submitted!';
 
+        // Show modal (no refresh)
         setTimeout(() => {
-          form.submit();
-        }, 800);
+          successModal.style.display = 'flex';
+        }, 500);
 
       } else {
         alert('Please fill all fields and select at least one event.');
@@ -132,14 +140,11 @@ document.addEventListener('DOMContentLoaded', function() {
     isDragging = true;
     startX = e.clientX - offsetX;
   });
-
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     e.preventDefault();
-    const moveX = e.clientX - startX;
-    setHandlePosition(moveX);
+    setHandlePosition(e.clientX - startX);
   });
-
   document.addEventListener('mouseup', () => {
     if (!isDragging) return;
     isDragging = false;
@@ -154,14 +159,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const touch = e.touches[0];
     startX = touch.clientX - offsetX;
   });
-
   document.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     const touch = e.touches[0];
-    const moveX = touch.clientX - startX;
-    setHandlePosition(moveX);
+    setHandlePosition(touch.clientX - startX);
   });
-
   document.addEventListener('touchend', () => {
     if (!isDragging) return;
     isDragging = false;
@@ -169,30 +171,49 @@ document.addEventListener('DOMContentLoaded', function() {
       setHandlePosition(0);
     }
   });
+
+  // Close modal => reset handle & track
+  closeModalBtn.addEventListener('click', () => {
+    successModal.style.display = 'none';
+    setHandlePosition(0);
+    track.style.backgroundColor = 'rgba(255,255,255,0.2)';
+    handle.style.backgroundColor = '#ff9800';
+    sliderText.innerText = 'Slide to Submit';
+  });
 })();
-// ---- END SLIDE TO SUBMIT LOGIC ----
 
-
-// ---- NAVBAR ARROW SCROLLING LOGIC ----
+// ---- NAVBAR ARROW SCROLLING LOGIC (optional) ----
 (function() {
   const leftArrow = document.querySelector('.nav-arrow-left');
   const rightArrow = document.querySelector('.nav-arrow-right');
   const navUl = document.querySelector('#navbar ul');
 
-  // The amount (in pixels) to scroll per click
-  const SCROLL_STEP = 100;
+  if (leftArrow && rightArrow && navUl) {
+    const SCROLL_STEP = 100;
 
-  leftArrow.addEventListener('click', () => {
-    navUl.scrollBy({
-      left: -SCROLL_STEP,
-      behavior: 'smooth'
+    leftArrow.addEventListener('click', () => {
+      navUl.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' });
     });
-  });
+    rightArrow.addEventListener('click', () => {
+      navUl.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' });
+    });
+  }
+})();
 
-  rightArrow.addEventListener('click', () => {
-    navUl.scrollBy({
-      left: SCROLL_STEP,
-      behavior: 'smooth'
-    });
+// ---- SPARKLING MOUSE CURSOR TRAIL ----
+(function() {
+  document.addEventListener('mousemove', (e) => {
+    // Create a small sparkle dot
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.pageX + 'px';
+    sparkle.style.top = e.pageY + 'px';
+
+    document.body.appendChild(sparkle);
+
+    // Remove it after animation
+    setTimeout(() => {
+      sparkle.remove();
+    }, 500);
   });
 })();

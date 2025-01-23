@@ -3,33 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blitzkrieg 2K25</title>
+  <title>Dark Symposium</title>
   
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" 
-    rel="stylesheet" 
-  />
-
   <!-- fullPage.js CSS -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css"
   />
 
+   <link 
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap"
+    rel="stylesheet"
+  />
+
   <!-- External CSS -->
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="/assets/styles.css" />
 </head>
 <body>
-  <!-- Top Navigation -->
+  <!-- Transparent Top Navigation -->
   <nav id="navbar">
-    <!-- NEW ARROW BUTTONS -->
+    <!-- If you'd like left/right arrows for horizontal scrolling, keep these: -->
     <div class="nav-arrow nav-arrow-left">&#10094;</div>
     <div class="nav-arrow nav-arrow-right">&#10095;</div>
-
+    
     <ul id="menu">
+      <!-- Original home & events in order, plus map & rules before register -->
       <li data-menuanchor="home"><a href="#home">Home</a></li>
       <li data-menuanchor="about-us"><a href="#about-us">About Us</a></li>
       <li data-menuanchor="event1"><a href="#event1">Event 1</a></li>
@@ -37,6 +35,8 @@
       <li data-menuanchor="event3"><a href="#event3">Event 3</a></li>
       <li data-menuanchor="event4"><a href="#event4">Event 4</a></li>
       <li data-menuanchor="event5"><a href="#event5">Event 5</a></li>
+      <li data-menuanchor="map"><a href="#map">Map</a></li>
+      <li data-menuanchor="rules"><a href="#rules">Rules</a></li>
       <li data-menuanchor="register"><a href="#register">Register</a></li>
     </ul>
   </nav>
@@ -55,7 +55,18 @@
     <div class="section" id="about-us">
       <div class="content">
         <h2>About Us</h2>
-        <p>All subsequent sections animate when you scroll to them.</p>
+        <p>
+          BLITZKRIEG is a prestigious national-level technical symposium 
+          hosted by the Electrical and Electronics Engineering (EEE) department 
+          of RMK Engineering College. It is an event that provides a platform 
+          for students from across the country to participate in a series of 
+          technical and non-technical events designed to enhance their knowledge 
+          and skills. Participants have the opportunity to engage in various 
+          competitions, workshops, and seminars, where they can showcase their 
+          talents, learn from experts, and network with peers. BLITZKRIEG aims 
+          to foster innovation, creativity, and technical excellence among 
+          students while providing a fun and competitive environment.
+        </p>
       </div>
     </div>
 
@@ -99,7 +110,39 @@
       </div>
     </div>
 
-    <!-- 8: Register -->
+    <!-- 8: Map (RMK Engineering College) -->
+    <div class="section" id="map">
+      <div class="content">
+        <h2>Venue Map</h2>
+        <p>Below is the location of RMK Engineering College:</p>
+        <!-- Google Maps embed for RMK Engineering College -->
+        <iframe 
+          width="600" 
+          height="450" 
+          style="border:0" 
+          loading="lazy" 
+          allowfullscreen 
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7777.235192329878!2d80.0863657!3d13.2314877!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5261486bc31f9d%3A0xe7096009c56e08f6!2sRMK%20Engineering%20College!5e0!3m2!1sen!2sin!4v1679691217752!5m2!1sen!2sin"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- 9: Rules -->
+    <div class="section" id="rules">
+      <div class="content">
+        <h2>Rules & Regulations</h2>
+        <p>
+          1. Please wear your ID card at all times.<br>
+          2. Respect the staff and volunteers.<br>
+          3. No outside food or drinks allowed.<br>
+          4. Follow the event schedule as announced.<br>
+          5. For queries, contact the info desk.
+        </p>
+      </div>
+    </div>
+
+    <!-- 10: Register -->
     <div class="section" id="register">
       <div class="registration-container">
         <h2>Register Now</h2>
@@ -150,9 +193,18 @@
     </div>
   </div> <!-- /#fullpage -->
 
+  <!-- Success Modal (no-refresh) -->
+  <div id="success-modal">
+    <div class="modal-content">
+      <h3>Details Submitted!</h3>
+      <p>Your registration details have been received successfully.</p>
+      <button id="close-modal-btn">OK</button>
+    </div>
+  </div>
+
   <!-- fullPage.js Script -->
   <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
   <!-- Custom JS -->
-  <script src="assets/script.js"></script>
+  <script src="/assets/script.js"></script>
 </body>
 </html>
